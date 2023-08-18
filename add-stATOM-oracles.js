@@ -34,7 +34,14 @@ const getManifestCall = harden([
     oracleAddresses: [
       "agoric1ldmtatp24qlllgxmrsjzcpe20fvlkp448zcuce",
       "agoric140dmkrz2e42ergjj7gyvejhzmjzurvqeq82ang",
+      "agoric1w8wktaur4zf8qmmtn3n7x3r0jhsjkjntcm3u6h",
+      "agoric10vjkvkmpp9e356xeh6qqlhrny2htyzp8hf88fk",
+      "agoric1qj07c7vfk3knqdral0sej7fa6eavkdn8vd8etf",
+      "agoric1lw4e4aas9q84tq0q92j85rwjjjapf8dmnllnft",
+      "agoric1ra0g6crtsy6r3qnpu7ruvm7qd4wjnznyzg5nu4",
+      "agoric1zj6vrrrjq4gsyr9lw7dplv4vyejg3p8j2urm82",
       "agoric15xddzse9lq74cyt6ev9d7wywxerenxdgxsdc3m",
+      "agoric1w5wmck6q2xrt20ax3njlk2k87m4t4l2y2xgw2d",
     ],
     priceAggregatorRef: {
       bundleID: "b1-8fb229296073327ed26d2a1ac56eda2bdc70c99d68621895a88f6cc09bce2defa3bd0894e97950e5a0696388193279c8f6b9399809611f8fec3ef5aeed355ba5",
