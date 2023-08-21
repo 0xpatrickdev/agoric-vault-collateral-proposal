@@ -8,12 +8,13 @@ const getManifestCall = harden([
     debtLimitValue: undefined,
     interchainAssetOptions: {
       decimalPlaces: 6,
-      denom: "ibc/toystatom1",
+      denom:
+        "ibc/49C630713B2AB60653F76C0C58D43C2A64956803B4D422CACB6DD4AD016ED846",
       initialPrice: undefined,
       issuerBoardId: undefined,
-      keyword: "STATOM1",
-      oracleBrand: "STATOM1",
-      proposedName: "stATOM1",
+      keyword: "STATOM",
+      oracleBrand: "STATOM",
+      proposedName: "stATOM",
     },
     interestRateValue: undefined,
     scaledPriceAuthorityRef: {

@@ -35,7 +35,7 @@ make fund-provision-pool
 # create a smart wallet
 ACCT_ADDR=your-address make provision-acct
 # add faucet tokens to wallet
-ACCT_ADDR=your-address FUNDS=80000000ubld,80000000uist,80000000ibc/toyatom,80000000ibc/toystatom1 make fund-acct
+ACCT_ADDR=your-address FUNDS=80000000ubld,80000000uist,80000000ibc/toyatom,80000000ibc/toystatom make fund-acct
 ```
 
 ## Proposal Steps
@@ -104,7 +104,7 @@ CHAIN_ID=agoriclocal
 alias oracle="yarn run --silent agops oracle"
 
 # accept the offer to submit a price
-oracle accept --offerId 1 --pair STATOM1.USD > offer-1-w1.json
+oracle accept --offerId 1 --pair STATOM.USD > offer-1-w1.json
 agoric wallet send --from $WALLET --offer offer-1-w1.json
 
 # push a price
@@ -112,10 +112,10 @@ oracle pushPriceRound --price 10 --roundId 1 --oracleAdminAcceptOfferId 1 > pric
 agoric wallet send --from $WALLET --offer price-offer-1-w1.json
 
 # verify price feed
-agoric follow :published.priceFeed.STATOM1-USD_price_feed
+agoric follow :published.priceFeed.STATOM-USD_price_feed
 
 # submit a price from wallet 2
-oracle accept --offerId 1 --pair STATOM1.USD > offer-1-w2.json
+oracle accept --offerId 1 --pair STATOM.USD > offer-1-w2.json
 agoric wallet send --from $WALLET_2 --offer offer-1-w2.json
 oracle pushPriceRound --price 10 --roundId 1 --oracleAdminAcceptOfferId 1 > price-offer-1-w2.json
 agoric wallet send --from $WALLET_2 --offer price-offer-1-w2.json
@@ -148,9 +148,9 @@ E(home.zoe).offer(inv, proposal, pmt)
 E(history[n]).getOfferResult() // should provide a VaultSeatKit, or show an error
 
 // open an stATOM vault
-E(E(home.agoricNames).lookup('issuer', 'STATOM1')).getBrand()
+E(E(home.agoricNames).lookup('issuer', 'STATOM')).getBrand()
 stAtomBrand = history[n]
-stAtomPurse = E(home.wallet).getPurse("stATOM1")
+stAtomPurse = E(home.wallet).getPurse("stATOM")
 oneMillionUstAtomAmount = { brand: stAtomBrand, value: 1_000_000n}
 proposal = { give: { Collateral: oneMillionUstAtomAmount }, want: { Minted: fiveMillionUistAmount } }
 E(stAtomPurse).withdraw(oneMillionUstAtomAmount)
@@ -164,7 +164,7 @@ E(history[n]).getOfferResult() // should provide a VaultSeatKit, or show an erro
 ## REPL Oracle Validation
 
 ```js
-E(home.agoricNames).lookup('oracleBrand', 'STATOM1')
+E(home.agoricNames).lookup('oracleBrand', 'STATOM')
 E(home.agoricNames).lookup('oracleBrand', 'USD')
 stAtomOracleBrand = history[n]
 E(home.priceAuthority).makeQuoteNotifier({ value: 10n * 10n ** 6n, brand: stAtomOracleBrand }, usdOracleBrand)

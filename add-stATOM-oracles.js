@@ -5,14 +5,14 @@ const manifestBundleRef = {bundleID:"b1-1c8e93cc80b28b2cf6b1252e9b6edb0253a1f962
 const getManifestCall = harden([
   "getManifestForPriceFeed",
   {
-    AGORIC_INSTANCE_NAME: "STATOM1-USD price feed",
+    AGORIC_INSTANCE_NAME: "STATOM-USD price feed",
     IN_BRAND_DECIMALS: 6,
     IN_BRAND_LOOKUP: [
       "agoricNames",
       "oracleBrand",
-      "STATOM1",
+      "STATOM",
     ],
-    IN_BRAND_NAME: "STATOM1",
+    IN_BRAND_NAME: "STATOM",
     OUT_BRAND_DECIMALS: 4,
     OUT_BRAND_LOOKUP: [
       "agoricNames",
