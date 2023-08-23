@@ -64,14 +64,16 @@ ACCT_ADDR=your-address FUNDS=9999000000ubld,9999000000uist make fund-acct
 NODE=https://devnet.rpc.agoric.net:443
 WALLET=dev-local
 CHAIN_ID=agoricdev-20
-B1=bundles/b1-1c8e93cc80b28b2cf6b1252e9b6edb0253a1f962889f8a255397b43984950a263dd9c9efd82aee5744b46e7bd57ff1c733030e9f4dc8da9b355b185a59687862.json
-B2=bundles/b1-8fb229296073327ed26d2a1ac56eda2bdc70c99d68621895a88f6cc09bce2defa3bd0894e97950e5a0696388193279c8f6b9399809611f8fec3ef5aeed355ba5.json
-B3=bundles/b1-c185bf3b0d7cf940a4f6d6ca1cd74a5d0f5ff330be1cfceaa6c5e4204ba1196e92444e086bf03573371216f41941d1b0fc8560984e2da09f2edd412e46dd62e3.json
-B4=bundles/b1-e4ba9cb60b5b59d4d4618710991fe8a503dd4a07c7f17029a342ccb41893bc961ae63bcb0e2c20e4bc2415c9755f090f7761751cdd00b85762902b357a48c5cf.json
-agd tx swingset install-bundle @$B1 --node $NODE --from $WALLET --chain-id $CHAIN_ID -y
-agd tx swingset install-bundle @$B2 --node $NODE --from $WALLET --chain-id $CHAIN_ID -y
-agd tx swingset install-bundle @$B3 --node $NODE --from $WALLET --chain-id $CHAIN_ID -y
-agd tx swingset install-bundle @$B4 --node $NODE --from $WALLET --chain-id $CHAIN_ID -y
+B1=b1-1c8e93cc80b28b2cf6b1252e9b6edb0253a1f962889f8a255397b43984950a263dd9c9efd82aee5744b46e7bd57ff1c733030e9f4dc8da9b355b185a59687862.json
+B2=b1-8fb229296073327ed26d2a1ac56eda2bdc70c99d68621895a88f6cc09bce2defa3bd0894e97950e5a0696388193279c8f6b9399809611f8fec3ef5aeed355ba5.json
+B3=b1-c185bf3b0d7cf940a4f6d6ca1cd74a5d0f5ff330be1cfceaa6c5e4204ba1196e92444e086bf03573371216f41941d1b0fc8560984e2da09f2edd412e46dd62e3.json
+B4=b1-e4ba9cb60b5b59d4d4618710991fe8a503dd4a07c7f17029a342ccb41893bc961ae63bcb0e2c20e4bc2415c9755f090f7761751cdd00b85762902b357a48c5cf.json
+
+cd bundles
+agd tx swingset install-bundle @$B1 --node $NODE --from $WALLET --chain-id $CHAIN_ID --gas=auto --gas-adjustment=1.2 -y
+agd tx swingset install-bundle @$B2 --node $NODE --from $WALLET --chain-id $CHAIN_ID --gas=auto --gas-adjustment=1.2 -y
+agd tx swingset install-bundle @$B3 --node $NODE --from $WALLET --chain-id $CHAIN_ID --gas=auto --gas-adjustment=1.2 -y
+agd tx swingset install-bundle @$B4 --node $NODE --from $WALLET --chain-id $CHAIN_ID --gas=auto --gas-adjustment=1.2 -y
 ```
 _Alternatively, the `deploy-bundles.sh` script can be used to ensure only un-published bundles are submitted._
 
@@ -93,7 +95,7 @@ CHAIN_ID=agoricdev-20
 agd tx gov submit-proposal swingset-core-eval \
   add-stATOM-permit.json add-stATOM.js \
   add-stATOM-oracles-permit.json add-stATOM-oracles.js \
-  --title="Enable stATOM1 Vault" --description="Evaluate add-stATOM.js add-stATOM-oracles" --deposit=1000000ubld \
+  --title="Enable stATOM Vault" --description="Evaluate add-stATOM.js add-stATOM-oracles.js" --deposit=1000000ubld \
   --gas=auto --gas-adjustment=1.2 \
   --node $NODE --from $WALLET --chain-id $CHAIN_ID
 ```
