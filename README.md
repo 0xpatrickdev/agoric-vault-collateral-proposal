@@ -1,3 +1,11 @@
+## Summary
+
+This repositrory contains code and instructions for submitting a [`swingset.CoreEval`](https://docs.agoric.com/guides/coreeval/) proposal to the [Agoric](https://github.com/Agoric/agoric-sdk/) blockchain. CoreEval is a special type of governance proposal that executes code after a pasing vote. 
+
+Specifically, this is a proposal for adding `stATOM` as a collateral type to [Inter Protocol](https://github.com/Agoric/agoric-sdk/tree/master/packages/inter-protocol) Vaults. See the [community discussion](https://community.agoric.com/t/onboard-statom-as-collateral/410) for more details.
+
+This proposal can easily be adapted for other collerateral types, and should serve as a reference for future proposals.
+
 ## Preqrequisites
 
 ### 1. Use Proposal Builder to generate Core Eval files
@@ -22,6 +30,16 @@ agd keys show [dev-local] -a
 ```
 
 * two if `minSubmissionCount` in `decentral-devnet-config.json` is set to `2`
+
+### 2.a Setting up hardware wallet
+ 
+Ledger hardware wallet signing is supported by agd, and can be set up as follows:
+
+```zsh
+agd keys add [my-ledger] --ledger --coin-type=118 [--account=0] [--index=0]
+# use the hw key to sign and submit a tx
+agd tx swingset [...] --from=[my-ledger] --sign-mode=amino-json
+```
 
 ### 3. Request faucet funds + Provision Wallet
 
@@ -54,6 +72,16 @@ agd tx swingset install-bundle $B1 --node $NODE --from $WALLET --chain-id $CHAIN
 agd tx swingset install-bundle $B2 --node $NODE --from $WALLET --chain-id $CHAIN_ID -y
 agd tx swingset install-bundle $B3 --node $NODE --from $WALLET --chain-id $CHAIN_ID -y
 agd tx swingset install-bundle $B4 --node $NODE --from $WALLET --chain-id $CHAIN_ID -y
+```
+_Alternatively, the `deploy-bundles.sh` script can be used to ensure only un-published bundles are submitted._
+
+
+### 1.a. Verify Bundle Deployment
+```zsh
+# returns a global list of deployed bundles
+agd query vstorage children swingStore.bundle --node $NODE
+# query for a specific bundle
+agd query vstorage data swingStore.bundle.[bundle id] --node $NODE
 ```
 
 ### 2. Submit Governance Proposal
@@ -121,6 +149,7 @@ oracle pushPriceRound --price 10 --roundId 1 --oracleAdminAcceptOfferId 1 > pric
 agoric wallet send --from $WALLET_2 --offer price-offer-1-w2.json
 ```
 
+When using the agops cli, the network can be specified by prefacing commands with `AGORIC_NET=devnet`.
 
 ## REPL Validation
 
