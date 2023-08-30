@@ -1,10 +1,10 @@
 ## Summary
 
-This repositrory contains code and instructions for submitting a [`swingset.CoreEval`](https://docs.agoric.com/guides/coreeval/) proposal to the [Agoric](https://github.com/Agoric/agoric-sdk/) blockchain. CoreEval is a special type of governance proposal that executes code after a pasing vote. 
+This repositrory contains code and instructions for submitting a [`swingset.CoreEval`](https://docs.agoric.com/guides/coreeval/) proposal to the [Agoric](https://github.com/Agoric/agoric-sdk/) blockchain. CoreEval is a special type of governance proposal that executes code after a passing vote. 
 
 Specifically, this is a proposal for adding `stATOM` as a collateral type to [Inter Protocol](https://github.com/Agoric/agoric-sdk/tree/master/packages/inter-protocol) Vaults. See the [community discussion](https://community.agoric.com/t/onboard-statom-as-collateral/410) for more details.
 
-This proposal can easily be adapted for other collerateral types, and should serve as a reference for future proposals.
+This proposal can easily be adapted for other collerateral types, and should serve as a reference for future proposals. You can see a demo and discussion of this code recorded during developer [office hours](https://github.com/Agoric/agoric-sdk/discussions/8240).
 
 ## Preqrequisites
 
@@ -13,6 +13,12 @@ This proposal can easily be adapted for other collerateral types, and should ser
 See [inter-protocol/scripts/add-STARS.js](https://github.com/Agoric/agoric-sdk/blob/5a00ae14aedb7d4a5f1e60c4bc9d79814089c99b/packages/inter-protocol/scripts/add-STARS.js) and this npm [script](https://github.com/Agoric/agoric-sdk/blob/5a00ae14aedb7d4a5f1e60c4bc9d79814089c99b/packages/inter-protocol/package.json#L13) for more details.
 
 I have checked in the generated files here for reference. The files were generated with [this fork](https://github.com/Agoric/agoric-sdk/compare/master...0xpatrickdev:agoric-sdk:pc/statom-vault-proposal-issuerName), using the added `yarn build:add-stATOM-proposal` script.
+
+
+Alternatively, you can edit the files provided here directly, adjusting the sections highlighted:
+
+ - [add-stATOM.js](https://github.com/0xpatrickdev/agoric-vault-collateral-proposal/blob/pc/readme-updates/add-stATOM.js#L9-L18)
+ - [add-stATOM-oracles.js](https://github.com/0xpatrickdev/agoric-vault-collateral-proposal/blob/pc/readme-updates/add-stATOM-oracles.js#L8-L45)
 
 ### 2. Setup wallet
 
@@ -59,6 +65,7 @@ ACCT_ADDR=your-address FUNDS=9999000000ubld,9999000000uist make fund-acct
 ## Proposal Steps
 
 ### 1. Deploy bundles
+_Before deploying bundles, you will want to query the chain [1.a.](#1a-verify-bundle-deployment) to see if they are already published. If they are, which is likely the case for a Vault Collateral Proposal, you can avoid the gas cost of deploying them again and skip this step._
 
 ```zsh
 NODE=https://devnet.rpc.agoric.net:443
@@ -120,6 +127,8 @@ agd tx gov vote 1 yes --node $NODE --from $WALLET --chain-id $CHAIN_ID
 ```
 
 
+<img alt="gov proposal on explorer" width="600px" src="docs/proposal.png" />
+
 ## Oracle Steps
 
 Before, ensure at least two addresses you control is listed in `oracleAddresses`. You may also want to adjust `minSubmissionCount` from `3` to `2` in `decentral-devnet-config.json`.
@@ -145,13 +154,28 @@ agoric wallet send --from $WALLET --offer price-offer-1-w1.json
 agoric follow :published.priceFeed.stATOM-USD_price_feed
 
 # submit a price from wallet 2
-oracle accept --offerId 1 --pair stATOM.USD > offer-1-w2.json
-agoric wallet send --from $WALLET_2 --offer offer-1-w2.json
-oracle pushPriceRound --price 10 --roundId 1 --oracleAdminAcceptOfferId 1 > price-offer-1-w2.json
-agoric wallet send --from $WALLET_2 --offer price-offer-1-w2.json
+AGORIC_NET=devnet oracle accept --offerId 1 --pair stATOM.USD > offer-1-w2.json
+AGORIC_NET=devnet agoric wallet send --from $WALLET_2 --offer offer-1-w2.json
+AGORIC_NET=devnet oracle pushPriceRound --price 10 --roundId 1 --oracleAdminAcceptOfferId 1 > price-offer-1-w2.json
+AGORIC_NET=devnet agoric wallet send --from $WALLET_2 --offer price-offer-1-w2.json
 ```
 
 When using the agops cli, the network can be specified by prefacing commands with `AGORIC_NET=devnet`.
+
+## Open a Vault with agops cli
+```zsh
+alias vaults="yarn run --silent agops vaults"
+AGORIC_NET=devnet vaults open --wantMinted 5.00 --giveCollateral 9.0 --collateralBrand stATOM > open-vault-offer.json
+AGORIC_NET=devnet agoric wallet send --from $WALLET --offer open-vault-offer.json
+```
+
+
+## UI Validation
+
+_A link to an endorsed UI can be found on https://devnet.agoric.net/._
+
+<img alt="stATOM vault in dapp ui" width="600px" src="docs/vault-ui.png" />
+
 
 ## REPL Validation
 
