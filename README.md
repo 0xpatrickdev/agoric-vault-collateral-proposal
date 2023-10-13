@@ -71,16 +71,13 @@ _Before deploying bundles, you will want to query the chain [1.a.](#1a-verify-bu
 NODE=https://devnet.rpc.agoric.net:443
 WALLET=dev-local
 CHAIN_ID=agoricdev-20
-B1=b1-8e2dcf513daf9530d347112cf403e8b3fd4f384e041cfa8f0819baa06a79e7f9f2b49fa77801e2d9bbf1717652004c4e65c1ca84d7345c4b44b97512cf8d1fdd.json
-B2=b1-d17444291f831122875555d2bf0518f6b762d2f34c26a2b6d17b5c1c2b01157dcdc94b7e8f39144cbe2b36232e048d7aed461de4b9eaa800f8a1431fc70fe5cd.json
-B3=b1-a190115d105bd5d7041f2981a89e9a9294c57ecd5706772a75839a65d70a530ace7a3670234e486fed05a03d84749034e77bdafcbd6f357d2770788397fd7fc8.json
-B4=b1-b9e881e987d10e9ee5aa5d827a1574a3aff2a4eee694b39da50ce28a5ba0c24753dea4f18a50338af6aa0ba0ca97a5544f5eef4db2263ca0ae9e4dd4d8f903be.json
+B1=b1-903e41a7c448a41b456298404a1c32c69302574209c6a5228723ed19e2dd99f2a693641196445bc27a90e19e1dfadfe6b3d9c9a93f080ffa33a70908e5af4fff.json
+B2=b1-80e6fe68b299c82c2d26802c312bc37966a559f7b28f87d058887a79a9db48ad97da2240e71e3f98986071da8fc3c5d02358bec577b17a89cee2b1cb3cd23958.json
+
 
 cd bundles
-agd tx swingset install-bundle @$B1 --node $NODE --from $WALLET --chain-id $CHAIN_ID --gas=auto --gas-adjustment=1.2 -y
-agd tx swingset install-bundle @$B2 --node $NODE --from $WALLET --chain-id $CHAIN_ID --gas=auto --gas-adjustment=1.2 -y
-agd tx swingset install-bundle @$B3 --node $NODE --from $WALLET --chain-id $CHAIN_ID --gas=auto --gas-adjustment=1.2 -y
-agd tx swingset install-bundle @$B4 --node $NODE --from $WALLET --chain-id $CHAIN_ID --gas=auto --gas-adjustment=1.2 -y -b block
+agd tx swingset install-bundle @$B1 --node $NODE --from $WALLET --chain-id $CHAIN_ID --gas=auto --gas-adjustment=1.2 -y -b block
+agd tx swingset install-bundle @$B2 --node $NODE --from $WALLET --chain-id $CHAIN_ID --gas=auto --gas-adjustment=1.2 -y -b block
 ```
 _Alternatively, the `deploy-bundles.sh` script can be used to ensure only un-published bundles are submitted._
 

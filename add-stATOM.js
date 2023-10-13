@@ -3,7 +3,7 @@
 
 const manifestBundleRef = {
   bundleID:
-    "b1-d17444291f831122875555d2bf0518f6b762d2f34c26a2b6d17b5c1c2b01157dcdc94b7e8f39144cbe2b36232e048d7aed461de4b9eaa800f8a1431fc70fe5cd",
+    "b1-903e41a7c448a41b456298404a1c32c69302574209c6a5228723ed19e2dd99f2a693641196445bc27a90e19e1dfadfe6b3d9c9a93f080ffa33a70908e5af4fff",
 };
 const getManifestCall = harden([
   "getManifestForAddAssetToVault",
@@ -15,16 +15,12 @@ const getManifestCall = harden([
         "ibc/42225F147137DDEB5FEF0F1D0A92F2AD57557AFA2C4D6F30B21E0D983001C002",
       initialPrice: undefined,
       issuerBoardId: undefined,
-      issuerName: "stATOM3",
-      keyword: "STATOM3",
-      oracleBrand: "stATOM3",
-      proposedName: "stATOM3",
+      issuerName: "stATOM",
+      keyword: "STATOM",
+      oracleBrand: "stATOM",
+      proposedName: "stATOM",
     },
     interestRateValue: undefined,
-    scaledPriceAuthorityRef: {
-      bundleID:
-        "b1-8e2dcf513daf9530d347112cf403e8b3fd4f384e041cfa8f0819baa06a79e7f9f2b49fa77801e2d9bbf1717652004c4e65c1ca84d7345c4b44b97512cf8d1fdd",
-    },
   },
 ]);
 const overrideManifest = {
@@ -111,7 +107,7 @@ const overrideManifest = {
     const {
       consume: { vatAdminSvc, zoe, agoricNamesAdmin },
       evaluateBundleCap,
-      installation: { produce: produceInstallations },
+      // NO installation: { ... },
       modules: {
         utils: { runModuleBehaviors },
       },
@@ -167,14 +163,9 @@ const overrideManifest = {
       [rawOptions, rawInstallations].map(shallowlyFulfilled),
     );
 
-    // Publish the installations for behavior dependencies.
-    const installAdmin = E(agoricNamesAdmin).lookupAdmin('installation');
-    await Promise.all(
-      entries(installations || {}).map(([key, value]) => {
-        produceInstallations[key].resolve(value);
-        return E(installAdmin).update(key, value);
-      }),
-    );
+    // DON'T Publish the installations for behavior dependencies.
+    // ...
+    //     produceInstallations[key].resolve(value);
 
     // Evaluate the manifest for our behaviors.
     return runModuleBehaviors({
