@@ -12,7 +12,9 @@ const getManifestCall = harden([
     interchainAssetOptions: {
       decimalPlaces: 6,
       denom:
-        "ibc/42225F147137DDEB5FEF0F1D0A92F2AD57557AFA2C4D6F30B21E0D983001C002",
+      // emerynet denom established 3 Oct
+      // cf https://github.com/Agoric/agoric-sdk/issues/8363#issuecomment-1745468458
+        "ibc/B60D2EF81DE7CCAE53C59B7850667595A7D580200C5636C8922ED78C95532BA7",
       initialPrice: undefined,
       issuerBoardId: undefined,
       issuerName: "stATOM",
