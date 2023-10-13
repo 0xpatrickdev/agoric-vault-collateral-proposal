@@ -3,15 +3,15 @@
 
 const manifestBundleRef = {
   bundleID:
-    "b1-b9e881e987d10e9ee5aa5d827a1574a3aff2a4eee694b39da50ce28a5ba0c24753dea4f18a50338af6aa0ba0ca97a5544f5eef4db2263ca0ae9e4dd4d8f903be",
+    "b1-80e6fe68b299c82c2d26802c312bc37966a559f7b28f87d058887a79a9db48ad97da2240e71e3f98986071da8fc3c5d02358bec577b17a89cee2b1cb3cd23958"
 };
 const getManifestCall = harden([
   "getManifestForPriceFeed",
   {
-    AGORIC_INSTANCE_NAME: "stATOM3-USD price feed",
+    AGORIC_INSTANCE_NAME: "stATOM-USD price feed",
     IN_BRAND_DECIMALS: 6,
-    IN_BRAND_LOOKUP: ["agoricNames", "oracleBrand", "stATOM3"],
-    IN_BRAND_NAME: "stATOM3",
+    IN_BRAND_LOOKUP: ["agoricNames", "oracleBrand", "stATOM"],
+    IN_BRAND_NAME: "stATOM",
     OUT_BRAND_DECIMALS: 4,
     OUT_BRAND_LOOKUP: ["agoricNames", "oracleBrand", "USD"],
     OUT_BRAND_NAME: "USD",
@@ -39,10 +39,6 @@ const getManifestCall = harden([
       "agoric15xddzse9lq74cyt6ev9d7wywxerenxdgxsdc3m",
       "agoric1w5wmck6q2xrt20ax3njlk2k87m4t4l2y2xgw2d",
     ],
-    priceAggregatorRef: {
-      bundleID:
-        "b1-a190115d105bd5d7041f2981a89e9a9294c57ecd5706772a75839a65d70a530ace7a3670234e486fed05a03d84749034e77bdafcbd6f357d2770788397fd7fc8",
-    },
   },
 ]);
 const overrideManifest = {
@@ -108,7 +104,7 @@ const overrideManifest = {
     const {
       consume: { vatAdminSvc, zoe, agoricNamesAdmin },
       evaluateBundleCap,
-      installation: { produce: produceInstallations },
+      // NO installation: { ... },
       modules: {
         utils: { runModuleBehaviors },
       },
@@ -164,14 +160,9 @@ const overrideManifest = {
       [rawOptions, rawInstallations].map(shallowlyFulfilled),
     );
 
-    // Publish the installations for behavior dependencies.
-    const installAdmin = E(agoricNamesAdmin).lookupAdmin('installation');
-    await Promise.all(
-      entries(installations || {}).map(([key, value]) => {
-        produceInstallations[key].resolve(value);
-        return E(installAdmin).update(key, value);
-      }),
-    );
+    // DON'T Publish the installations for behavior dependencies.
+    // const installAdmin = E(agoricNamesAdmin).lookupAdmin('installation');
+    // ...
 
     // Evaluate the manifest for our behaviors.
     return runModuleBehaviors({
