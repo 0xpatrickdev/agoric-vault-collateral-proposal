@@ -1,6 +1,6 @@
 ## Summary
 
-This repositrory contains code and instructions for submitting a [`swingset.CoreEval`](https://docs.agoric.com/guides/coreeval/) proposal to the [Agoric](https://github.com/Agoric/agoric-sdk/) blockchain. CoreEval is a special type of governance proposal that executes code after a passing vote. 
+This repository contains code and instructions for submitting a [`swingset.CoreEval`](https://docs.agoric.com/guides/coreeval/) proposal to the [Agoric](https://github.com/Agoric/agoric-sdk/) blockchain. CoreEval is a special type of governance proposal that executes code after a passing vote. 
 
 Specifically, this is a proposal for adding `stATOM` as a collateral type to [Inter Protocol](https://github.com/Agoric/agoric-sdk/tree/master/packages/inter-protocol) Vaults. See the [community discussion](https://community.agoric.com/t/onboard-statom-as-collateral/410) for more details.
 
